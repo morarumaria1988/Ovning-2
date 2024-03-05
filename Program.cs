@@ -8,8 +8,8 @@
             {
                 Console.WriteLine("Hello! You have reached the main menu. Please " +
                 "enter from the following digits to test various functions.");
-                Console.WriteLine("1. Buy a bio ticket" +
-                                "\n2. Buy several bio tickets" +
+                Console.WriteLine("1. The price of a bio ticket" +
+                                "\n2. The price of several bio tickets" +
                                 "\n3. Repeat a word ten times" +
                                 "\n4. The third word in a sentence" +
                                 "\n0. Quit");
@@ -24,16 +24,16 @@
                 switch (parsedInt)
                 {
                     case 1:
-                        bio();
+                        Cinema();
                         break;
                     case 2:
-                        bioGroup();
+                        CinemaGroup();
                         break;
                     case 3:
-                        tenTimes();
+                        TenTimes();
                         break;
                     case 4:
-                        the3rd();
+                        The3rd();
                         break;
                     case 0:
                         Environment.Exit(0);
@@ -45,35 +45,72 @@
             }
         }
 
-        private static void the3rd()
+        // Print the 3rd word
+        private static void The3rd()
         {
-            Console.WriteLine("Write at least 3 words: ");
+            Console.Write("Write at least 3 words: ");
             string[] words = Console.ReadLine()!.Split(" ");
             Console.WriteLine("The 3rd word is: " + words[2]);
             Console.WriteLine();
         }
 
-        private static void tenTimes()
+        // Print a word ten times
+        private static void TenTimes()
         {
-            Console.WriteLine("Write a word: ");
+            Console.Write("Write a word: ");
             string word = Console.ReadLine()!;
             for (int i = 1; i < 10; i++)
             {
                 Console.Write(i + ". " + word + ", ");
             }
-                Console.Write("10. " + word + '.');
-            Console.WriteLine();
+                Console.WriteLine("10. " + word + '.');
             Console.WriteLine();
         }
 
-        private static void bio()
+        // Figure out and print the price of one bio ticket for the selected age
+        private static void Cinema()
         {
-            throw new NotImplementedException();
+            Console.Write("Enter the age of the viewer: ");
+            int age = int.Parse(Console.ReadLine()!);
+            if (age < 20)
+                Console.WriteLine("Youth price: SEK 80"); 
+            else if (age > 64)
+                Console.WriteLine("Pensioner price: SEK 90");
+            else
+                Console.WriteLine("Standard price: SEK 120");
+            Console.WriteLine();
         }
 
-        private static void bioGroup()
+        // Figure out the total price of bio tickets for the selected ages
+        private static void CinemaGroup()
         {
-            throw new NotImplementedException();
+            Console.Write("Write how many you are going to the cinema: ");
+            int companySize = int.Parse(Console.ReadLine()!);
+            int[] ages = new int[companySize];
+            Console.WriteLine("Enter the ages of the viewers (one/line):");
+            for (int i = 0; i < companySize; i++)
+            {
+                ages[i] = int.Parse(Console.ReadLine()!);
+            }
+            // Calculate the total price
+            int sum = 0;
+             for (int i = 0; i < companySize; i++)
+            {
+               sum += Cinema(ages[i]);
+            }
+            Console.WriteLine("The total price is: " + sum + " SEK.");
+            Console.WriteLine();
+        }
+
+        // Figure out the price of one bio ticket for a given age
+        private static int Cinema(int age)
+        {
+            if (age < 20)
+                return 80;
+            else if (age > 64)
+                return 90;
+            else
+                return 120;
         }
     }
 }

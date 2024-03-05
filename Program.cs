@@ -98,7 +98,7 @@
             {
                sum += Cinema(ages[i]);
             }
-            Console.WriteLine("The total price is: " + sum + " SEK.");
+            Console.WriteLine("The total price is: SEK " + sum);
             Console.WriteLine();
         }
 
